@@ -1,112 +1,63 @@
 import colors from "@/constants/colors";
-import { Link, useRouter } from "expo-router";
 import { 
     View, 
     Text, 
-    ActivityIndicator, 
+    StyleSheet, 
+    TextInput,
     Pressable, 
-    TextInput, 
-    Alert,
     SafeAreaView,
-    ScrollView
+    ScrollView,
+    Alert
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useState, useEffect } from "react"; // Adiciona useEffect
-import styles from "@/assets/styles";
+import { router } from "expo-router";
+import { useState } from "react";
 import { supabase } from "@/src/lib/supabase";
+import styles from "@/assets/styles";
 
 export default function Signup() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [cnpj, setCnpj] = useState("");
     const [password, setPassword] = useState("");
-    const [localizacao, setLocalizacao] = useState("");
+    const [cnpj, setCnpj] = useState("");
+    // const [localizacao, setLocalizacao] = useState("");
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
 
-    // Função para renovar o token antes de expirar
-    const renewTokenBeforeExpiry = async () => {
-        const { data, error } = await supabase.auth.refreshSession();
-        if (error) {
-            console.error("Erro ao renovar o token:", error);
-            return null;
-        } else {
-            console.log("Token renovado com sucesso:", data);
-            return data;
-        }
-    };
-
-    // Renova o token periodicamente
-    useEffect(() => {
-        const interval = setInterval(renewTokenBeforeExpiry, 5 * 60 * 1000); // Renova a cada 5 minutos
-        return () => clearInterval(interval); // Limpa o intervalo ao desmontar o componente
-    }, []);
-
-    // Função para lidar com o cadastro
     async function handleSignUp() {
         setLoading(true);
-    
-        // Validação básica dos campos
-        if (!name || !email || !cnpj || !password || !localizacao) {
-            Alert.alert("Erro", "Preencha todos os campos.");
+        
+        console.log("Nome enviado:", name);
+        console.log("Email enviado:", email);
+        console.log("Senha enviada:", password);
+        console.log("CNPJ enviado:", cnpj);
+        // console.log("Localização enviada:", localizacao);
+
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    name: name, 
+                    cnpj: cnpj,
+                    senha: password 
+                }
+            }
+        });
+        
+        
+        if (error) {
+            console.error("Erro no Supabase:", error);
+            Alert.alert("Erro", error.message);
             setLoading(false);
             return;
         }
-    
-        try {
-            console.log("Dados enviados para o Supabase:", {
-                email,
-                password,
-                nome: name,
-                senha: password,
-                localizacao,
-                cnpj,
-            });
-    
-            // 1. Cadastrar o usuário no Supabase Auth
-            const { data: userData, error: authError } = await supabase.auth.signUp({
-                email,
-                password,
-                options: {
-                    data: {
-                        nome: name,
-                        senha: password,
-                        localizacao: localizacao,
-                        cnpj: cnpj,
-                    },
-                },
-            });
-    
-            if (authError) {
-                console.error("Erro no cadastro do usuário:", authError);
-    
-                // Se o token expirou, tente renová-lo e cadastrar novamente
-                if (authError.message === "jwt expired") {
-                    const newSession = await renewTokenBeforeExpiry();
-                    if (newSession) {
-                        console.log("Token renovado, tentando cadastro novamente...");
-                        return handleSignUp(); // Tenta novamente após renovar o token
-                    }
-                }
-    
-                Alert.alert("Erro", authError.message);
-                setLoading(false);
-                return;
-            }
-    
-            console.log("Usuário cadastrado:", userData);
-    
-            // 2. Redirecionar para a tela de login
-            Alert.alert("Sucesso", "Cadastro realizado com sucesso!");
-            router.replace('/(auth)/signin/page');
-        } catch (error) {
-            console.error("Erro durante o cadastro:", error);
-            Alert.alert("Erro", "Ocorreu um erro durante o cadastro.");
-        } finally {
-            setLoading(false);
-        }
-    }
 
+        console.log("Usuário cadastrado:", data);
+
+        setLoading(false);
+        router.replace('/(auth)/signin/page');
+    }
+    
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.scrollView}>
@@ -141,16 +92,6 @@ export default function Signup() {
                         </View>
 
                         <View>
-                            <Text style={styles.label}>Email</Text>
-                            <TextInput
-                                placeholder="Digite seu email..."
-                                style={styles.input}
-                                value={email}
-                                onChangeText={setEmail}
-                            />
-                        </View>
-
-                        <View>
                             <Text style={styles.label}>CNPJ</Text>
                             <TextInput
                                 placeholder="Digite seu CNPJ..."
@@ -161,12 +102,12 @@ export default function Signup() {
                         </View>
 
                         <View>
-                            <Text style={styles.label}>Localização</Text>
+                            <Text style={styles.label}>Email</Text>
                             <TextInput
-                                placeholder="Digite sua localização..."
+                                placeholder="Digite seu email..."
                                 style={styles.input}
-                                value={localizacao}
-                                onChangeText={setLocalizacao}
+                                value={email}
+                                onChangeText={setEmail}
                             />
                         </View>
 
@@ -182,7 +123,9 @@ export default function Signup() {
                         </View>
 
                         <Pressable style={styles.button} onPress={handleSignUp}>
-                            <Text style={styles.buttonText}>Cadastrar</Text>
+                            <Text style={styles.buttonText}>
+                                {loading ? 'Carregando...' : 'Cadastrar' }
+                            </Text>
                         </Pressable>
                     </View>
                 </View>

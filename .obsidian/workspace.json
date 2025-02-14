@@ -192,6 +192,8 @@
   },
   "active": "4d7b12b6fd6006e9",
   "lastOpenFiles": [
+    "src/context/AuthContext.tsx",
+    "src/context",
     "src/lib/auth.js",
     "src/app/(panel)/Drawing 2025-02-13 18.23.16.excalidraw.md",
     "Modelo banco.md",
@@ -210,9 +212,7 @@
     "node_modules/@rneui/base/package.json",
     "node_modules/@rneui/base/README.md",
     "node_modules/@react-native-async-storage/async-storage/LICENSE",
-    "node_modules/@react-native-async-storage/async-storage/package.json",
     "node_modules/@react-native-async-storage/async-storage/README.md",
-    "node_modules/@react-native-async-storage/async-storage/RNCAsyncStorage.podspec",
     "node_modules/react-native-url-polyfill/README.md",
     "node_modules/@types/phoenix/README.md",
     "node_modules/is-plain-obj/readme.md",

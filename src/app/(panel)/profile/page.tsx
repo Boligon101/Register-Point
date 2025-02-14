@@ -1,28 +1,38 @@
+import { useAuth } from "@/src/context/AuthContext";
+import { supabase } from "@/src/lib/supabase";
+import { View, Text, StyleSheet, Button, Alert } from "react-native";
+import styles from "@/assets/styles";
 import colors from "@/constants/colors";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
-export default function Index() {
+export default function Profile() {
+    const { setAuth, user } = useAuth()
+
+    async function handleSignout() {
+        const { error } = await supabase.auth.signOut()
+        setAuth(null)
+
+        if (error) {
+            Alert.alert("Error", 'Erro ao tentar sair da conta')
+            return
+        }
+        
+    }
+    
 
     return(
 
-        <View style={styles.container}>
+        <View style={styles.container} >
+            <Text style={{ color: colors.white}} >Pagina De Perfil</Text>
+            <Text style={{ color: colors.white}} >{user?.email}</Text>
+            <Text style={{ color: colors.white}} >{user?.id}</Text>
 
-            <Text> Pagina Perfil </Text>
+            <Button
+                title="Deslogar"
+                onPress={handleSignout}
+            >
 
+            </Button>
         </View>
 
     )
 }
-
-const styles = StyleSheet.create({
-
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.white
-
-    },
-
-})

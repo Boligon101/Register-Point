@@ -83,4 +83,11 @@ export default StyleSheet.create({
     link: {
         color: colors.green,
     },
+    load: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.zinc
+
+    },
 });
