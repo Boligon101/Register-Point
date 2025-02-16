@@ -2,8 +2,8 @@ import { useAuth } from "@/src/context/AuthContext";
 import { supabase } from "@/src/lib/supabase";
 import { View, Text, StyleSheet, Button, Alert } from "react-native";
 import styles from "@/assets/styles";
-import colors from "@/constants/colors";
-
+import colors from "@/constants/Colors";
+import Nav from "@/components/nav";
 export default function Profile() {
     const { setAuth, user } = useAuth()
 
@@ -22,6 +22,10 @@ export default function Profile() {
     return(
 
         <View style={styles.container} >
+
+            <Nav showBackButton={true} />
+
+
             <Text style={{ color: colors.white}} >Pagina De Perfil</Text>
             <Text style={{ color: colors.white}} >{user?.email}</Text>
             <Text style={{ color: colors.white}} >{user?.id}</Text>

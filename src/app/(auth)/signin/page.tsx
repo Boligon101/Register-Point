@@ -12,7 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
 import { useState } from "react";
 import { supabase } from "@/src/lib/supabase";
-import colors from "@/constants/colors";
+import colors from "@/constants/Colors";
 import styles from "@/assets/styles";
 
 export default function Login() {

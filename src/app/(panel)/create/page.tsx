@@ -14,12 +14,13 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { supabase } from "@/src/lib/supabase";
 import styles from "@/assets/styles";
+import Nav from "@/components/nav";
 
 export default function Signup() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [cnpj, setCnpj] = useState("");
+    const [cpf, setCPF] = useState("");
     // const [localizacao, setLocalizacao] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -29,7 +30,7 @@ export default function Signup() {
         console.log("Nome enviado:", name);
         console.log("Email enviado:", email);
         console.log("Senha enviada:", password);
-        console.log("CNPJ enviado:", cnpj);
+        console.log("CPF enviado:", cpf);
         // console.log("Localização enviada:", localizacao);
 
         const { data, error } = await supabase.auth.signUp({
@@ -38,7 +39,7 @@ export default function Signup() {
             options: {
                 data: {
                     name: name, 
-                    cnpj: cnpj,
+                    cpf: cpf,
                     senha: password 
                 }
             }
@@ -63,20 +64,7 @@ export default function Signup() {
             <ScrollView contentContainerStyle={styles.scrollView}>
                 <View style={styles.container}>
 
-                    <View style={styles.formHeader}>
-                        <Pressable 
-                            style={styles.backButton}
-                            onPress={() => router.back()}
-                        >
-                            <Ionicons name="arrow-back" size={24} color={colors.white} />
-                        </Pressable>
-
-                        <View style={styles.header}>
-                            <Text style={styles.LogoText}>
-                                Register<Text style={styles.greenText}>Point</Text>
-                            </Text>
-                        </View>
-                    </View>
+                    <Nav showBackButton={true} />
 
                     <Text style={styles.slogan}>Crie uma conta</Text>
 
@@ -92,12 +80,12 @@ export default function Signup() {
                         </View>
 
                         <View>
-                            <Text style={styles.label}>CNPJ</Text>
+                            <Text style={styles.label}>CPF</Text>
                             <TextInput
-                                placeholder="Digite seu CNPJ..."
+                                placeholder="Digite seu CPF..."
                                 style={styles.input}
-                                value={cnpj}
-                                onChangeText={setCnpj}
+                                value={cpf}
+                                onChangeText={setCPF}
                             />
                         </View>
 
