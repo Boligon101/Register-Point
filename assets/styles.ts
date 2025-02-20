@@ -16,23 +16,31 @@ export default StyleSheet.create({
         backgroundColor: colors.zinc,
     },
     header: {
-        paddingLeft: 14,
+        paddingLeft: 0,
         paddingRight: 14,
+        marginBottom: 20, 
+        flex: 1,
+    },
+    headerStart: {
+        paddingLeft: 0,
+        paddingRight: 14,
+        marginBottom: 20, 
     },
     LogoText: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: "bold",
         color: colors.white,
-        marginBottom: 8,
-        marginTop: 8,
+        marginBottom: 0,
+        marginTop: 0,
     },
     greenText: {
         color: colors.green,
     },
     slogan: {
-        fontSize: 36,
+        fontSize: 32, // Reduzi o tamanho da fonte para ficar mais compacto
         color: colors.white,
-        marginBottom: 34,
+        marginBottom: 20,
+        
     },
     form: {
         flex: 1,
@@ -43,7 +51,8 @@ export default StyleSheet.create({
         paddingRight: 14,
     },
     formHeader: {
-        flexDirection: "row", 
+        flexDirection: "row",
+        justifyContent: "space-between",
         alignItems: "center",
     },
     label: {
@@ -76,6 +85,16 @@ export default StyleSheet.create({
         padding: 8,
         borderRadius: 8,
         marginBottom: 8,
+        marginRight: 14,
+        
+    },
+    menuButton: {
+        backgroundColor: "rgba(255,255,255, 0.55)",
+        borderRadius: 8,
+        padding: 8,
+    },
+    menuButtonContainer: {
+        marginLeft: 16,
     },
     textLink: {
         paddingTop: 8,
@@ -87,7 +106,57 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.zinc
-
+        backgroundColor: colors.zinc,
+    },
+    imageContainer: {
+        width: 35,
+        height: 35,
+        borderRadius: 50,
+        overflow: 'hidden',
+        marginRight: 6,
+    },
+    logoImage: {
+        width: '100%',
+        height: '100%',
+    },
+    logoContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    drawerButton: {
+        backgroundColor: colors.white,
+        borderRadius: 8,
+        padding: 10,
+    },
+    content: {
+        marginTop: 20,
+    },
+    sceneContainerStyle: {
+        backgroundColor: colors.zinc,
+    },
+    overlayColor: {
+        backgroundColor: 'transparent',
+    },
+    drawerLabelStyle: {
+        marginLeft: -5,
+        fontSize: 16,
+        fontWeight: '500',
+    },
+    drawerItemStyle: {
+        borderRadius: 8,
+        marginHorizontal: 10,
+        marginVertical: 5,
+    },
+    drawerActiveTintColor: {
+        color: colors.green,
+    },
+    drawerInactiveTintColor: {
+        color: colors.white,
+    },
+    drawerActiveBackgroundColor: {
+        backgroundColor: 'rgba(72, 187, 120, 0.1)',
+    },
+    drawerInactiveBackgroundColor: {
+        backgroundColor: 'transparent',
     },
 });

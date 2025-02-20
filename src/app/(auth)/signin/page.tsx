@@ -48,7 +48,7 @@ export default function Login() {
             <ScrollView contentContainerStyle={styles.scrollView}>
                 <View style={styles.container}>
 
-                    <View style={styles.header}>
+                    <View style={styles.headerStart}>
                         <Text style={styles.LogoText}>
                             Register<Text style={styles.greenText}>Point</Text>
                         </Text>
