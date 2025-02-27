@@ -1,17 +1,7 @@
-import colors from "@/constants/Colors";
-import { 
-    View, 
-    Text, 
-    StyleSheet, 
-    TextInput,
-    Pressable, 
-    SafeAreaView,
-    ScrollView,
-    Alert
-} from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, Pressable, SafeAreaView, ScrollView, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { useState } from "react";
 import { supabase } from "@/src/lib/supabase";
 import styles from "@/assets/styles";
 
@@ -20,55 +10,39 @@ export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [cnpj, setCnpj] = useState("");
-    // const [localizacao, setLocalizacao] = useState("");
     const [loading, setLoading] = useState(false);
 
     async function handleSignUp() {
-        setLoading(true);
-        
-        console.log("Nome enviado:", name);
-        console.log("Email enviado:", email);
-        console.log("Senha enviada:", password);
-        console.log("CNPJ enviado:", cnpj);
-        // console.log("Localização enviada:", localizacao);
-
-        const { data, error } = await supabase.auth.signUp({
+        const { data: authData, error: authError } = await supabase.auth.signUp({
             email,
             password,
             options: {
-                data: {
-                    name: name, 
-                    cnpj: cnpj,
-                    senha: password 
-                }
-            }
-        });
-        
-        
-        if (error) {
-            console.error("Erro no Supabase:", error);
-            Alert.alert("Erro", error.message);
-            setLoading(false);
+              data: {
+                name,
+                cnpj,
+              },
+            },
+          });
+          
+          if (authError) {
+            console.error("Erro no Supabase Auth:", authError);
+            Alert.alert("Erro", authError.message);
             return;
-        }
-
-        console.log("Usuário cadastrado:", data);
-
-        setLoading(false);
-        router.replace('/(auth)/signin/page');
-    }
+          }
+          
+          console.log("Usuário cadastrado:", authData);
+      }
     
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.scrollView}>
                 <View style={styles.container}>
-
                     <View style={styles.formHeader}>
                         <Pressable 
                             style={styles.backButton}
                             onPress={() => router.back()}
                         >
-                            <Ionicons name="arrow-back" size={24} color={colors.white} />
+                            <Ionicons name="arrow-back" size={24} color="white" />
                         </Pressable>
 
                         <View style={styles.header}>

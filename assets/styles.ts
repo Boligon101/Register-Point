@@ -20,6 +20,7 @@ export default StyleSheet.create({
         paddingRight: 14,
         marginBottom: 20, 
         flex: 1,
+        alignItems: "center", // Centraliza o título
     },
     headerStart: {
         paddingLeft: 0,
@@ -37,10 +38,9 @@ export default StyleSheet.create({
         color: colors.green,
     },
     slogan: {
-        fontSize: 32, // Reduzi o tamanho da fonte para ficar mais compacto
+        fontSize: 32,
         color: colors.white,
         marginBottom: 20,
-        
     },
     form: {
         flex: 1,
@@ -54,6 +54,9 @@ export default StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        paddingHorizontal: 16, // Adiciona espaçamento horizontal
+        paddingVertical: 12, // Adiciona espaçamento vertical
+        backgroundColor: colors.zinc, // Cor de fundo do cabeçalho
     },
     label: {
         color: colors.zinc,
@@ -86,7 +89,6 @@ export default StyleSheet.create({
         borderRadius: 8,
         marginBottom: 8,
         marginRight: 14,
-        
     },
     menuButton: {
         backgroundColor: "rgba(255,255,255, 0.55)",
@@ -158,5 +160,10 @@ export default StyleSheet.create({
     },
     drawerInactiveBackgroundColor: {
         backgroundColor: 'transparent',
+    },
+    text: {
+        fontSize: 16,
+        color: colors.white,
+        marginBottom: 10,
     },
 });

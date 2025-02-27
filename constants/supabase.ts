@@ -1,3 +1,3 @@
-export const supaUrl = 'https://vtbzarnrukqecuphffem.supabase.co'
+export const supaUrl = 'https://zpdeyzivzlsyvlnrqdcz.supabase.co'
 
-export const anonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0Ynphcm5ydWtxZWN1cGhmZmVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzNzI0OTEsImV4cCI6MjA1NDk0ODQ5MX0.FMruIMwUBZ4WgSj_EGlbtCaruZ1cZf7LkcF3jnYSgWw'
+export const anonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwZGV5eml2emxzeXZsbnJxZGN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2OTAyNzAsImV4cCI6MjA1NjI2NjI3MH0.ZXMr1XhwlPI0u1f5jR_r2y1jxrb3jXXCalvwuYGyaiU'

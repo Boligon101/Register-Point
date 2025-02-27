@@ -1,8 +1,16 @@
+// src/app/(panel)/_layout.js
 import { Drawer } from 'expo-router/drawer';
 import Colors from '@/constants/Colors';
 import { Feather } from '@expo/vector-icons';
+import { useAuth } from '../../context/AuthContext';
 
 export default function PanelLayout() {
+  const { user } = useAuth(); // Verifica se o usuário está autenticado
+
+  if (!user) {
+    return null; // Não renderiza o Drawer se o usuário não estiver autenticado
+  }
+
   return (
     <Drawer
       screenOptions={{
@@ -27,7 +35,7 @@ export default function PanelLayout() {
         drawerActiveBackgroundColor: 'rgba(72, 187, 120, 0.1)',
         drawerInactiveBackgroundColor: 'transparent',
         drawerHideStatusBarOnOpen: true,
-        headerShown: false,
+        headerShown: false, // Oculta o header para todas as telas do Drawer
       }}
     >
       <Drawer.Screen
