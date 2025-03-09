@@ -1,44 +1,81 @@
-// src/app/(panel)/profile/page.js
+import React, { useEffect, useState } from "react";
+import { View, Text, Pressable, SafeAreaView, ScrollView } from "react-native";
 import { useAuth } from "@/src/context/AuthContext";
 import { supabase } from "@/src/lib/supabase";
-import { View, Text, Pressable, Alert } from "react-native";
-import { useRouter } from "expo-router";
+import styles from "@/assets/styles";
 import Nav from "@/src/components/nav";
-import styles from "@/assets/styles"; // Importe os estilos globais
-import colors from "@/constants/Colors"; // Importe as cores
 
-export default function Profile() {
-    const { setAuth, user } = useAuth();
-    const router = useRouter();
+export default function UserProfile() {
+    const { user, logout } = useAuth();
+    const [userName, setUserName] = useState<string>("N/A");
 
-    async function handleSignout() {
-        const { error } = await supabase.auth.signOut();
+    useEffect(() => {
+        const fetchUserName = async () => {
+            if (!user) return;
 
-        if (error) {
-            Alert.alert("Error", 'Erro ao tentar sair da conta');
-            return;
-        }
+            // Se for uma empresa, use o nome do user_metadata
+            if (user.user_metadata?.name) {
+                setUserName(user.user_metadata.name);
+                return;
+            }
 
-        setAuth(null); // Define o usuário como null
-        router.replace('/(auth)/signin/page'); // Navega para a página de login
-    }
+            // Se for um funcionário, busque o nome na tabela funcionarios
+            const { data: funcionario, error } = await supabase
+                .from('funcionarios')
+                .select('name')
+                .eq('id_usuario', user.id)
+                .single();
+
+            if (error) {
+                console.error('Erro ao buscar funcionário:', error);
+                setUserName("N/A");
+                return;
+            }
+
+            if (funcionario) {
+                setUserName(funcionario.name);
+            } else {
+                setUserName("N/A");
+            }
+        };
+
+        fetchUserName();
+    }, [user]);
 
     return (
-        <View style={styles.container}>
-            {/* Nav no topo da tela */}
-            <Nav showBackButton={false} />
+        <SafeAreaView style={styles.safeArea}>
+            <ScrollView contentContainerStyle={styles.scrollView}>
+                <View style={styles.container}>
+                    <Nav />
+                    
+                    <Text style={styles.slogan}>Perfil do Usuário</Text>
 
-            {/* Conteúdo da página */}
-            <View style={styles.content}>
-                <Text style={styles.LogoText}>Página de Perfil</Text>
-                <Text style={styles.text}>Email: {user?.email}</Text>
-                <Text style={styles.text}>ID: {user?.id}</Text>
+                    <View style={styles.form}>
+                        {user ? (
+                            <>
+                                <View>
+                                    <Text style={styles.label}>Nome</Text>
+                                    <Text style={styles.text}>{userName}</Text>
+                                </View>
 
-                {/* Botão de deslogar */}
-                <Pressable style={styles.button} onPress={handleSignout}>
-                    <Text style={styles.buttonText}>Deslogar</Text>
-                </Pressable>
-            </View>
-        </View>
+                                <View>
+                                    <Text style={styles.label}>Email</Text>
+                                    <Text style={styles.text}>{user.email || "N/A"}</Text>
+                                </View>
+
+                                <Pressable 
+                                    style={styles.button} 
+                                    onPress={logout} 
+                                >
+                                    <Text style={styles.buttonText}>Deslogar</Text>
+                                </Pressable>
+                            </>
+                        ) : (
+                            <Text>Usuário não autenticado.</Text>
+                        )}
+                    </View>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }

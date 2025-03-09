@@ -6,6 +6,7 @@ import { supabase } from "../lib/supabase"; // Importe o supabase
 interface AuthContextProps {
     user: User | null;
     setAuth: (authUser: User | null) => void;
+    logout: () => Promise<void>; // Adiciona a função de logout
 }
 
 const AuthContext = createContext({} as AuthContextProps);
@@ -17,6 +18,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Função para definir o usuário autenticado
     function setAuth(authUser: User | null) {
         setUser(authUser);
+    }
+
+    // Função para realizar o logout
+    async function logout() {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            console.error("Erro ao deslogar:", error.message);
+        } else {
+            setAuth(null);
+            router.replace('/(auth)/signin/page'); // Navega para a página de login
+        }
     }
 
     // Verifica a sessão do usuário ao carregar o componente
@@ -57,7 +69,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, setAuth }}>
+        <AuthContext.Provider value={{ user, setAuth, logout }}>
             {children}
         </AuthContext.Provider>
     );

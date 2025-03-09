@@ -3,12 +3,13 @@ import { Drawer } from 'expo-router/drawer';
 import Colors from '@/constants/Colors';
 import { Feather } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
+import { Text } from 'react-native'; 
 
 export default function PanelLayout() {
   const { user } = useAuth(); // Verifica se o usuário está autenticado
 
   if (!user) {
-    return null; // Não renderiza o Drawer se o usuário não estiver autenticado
+    return <Text>Usuário não autenticado</Text>; 
   }
 
   return (
@@ -47,11 +48,23 @@ export default function PanelLayout() {
         }}
       />
       <Drawer.Screen
-        name="employees/page"
+        name="employes/page"
         options={{
           drawerLabel: "Funcionários",
           title: "Funcionários",
           drawerIcon: ({ color }) => <Feather name="users" size={20} color={color} />,
+        }}
+      />
+      <Drawer.Screen
+        name="employes/create/page"
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
+      <Drawer.Screen
+        name="employes/edit/page"
+        options={{
+          drawerItemStyle: { display: "none" },
         }}
       />
     </Drawer>
