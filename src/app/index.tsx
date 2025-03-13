@@ -7,7 +7,7 @@ export default function Index() {
 
     return(
 
-        <View style={styles.load}>
+        <View style={styles.container}>
 
             <ActivityIndicator 
                 size={88}

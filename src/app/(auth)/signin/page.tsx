@@ -1,12 +1,12 @@
 import { 
     View, 
     Text, 
-    StyleSheet, 
     TextInput, 
     Pressable, 
     SafeAreaView, 
     ScrollView, 
-    Alert 
+    Alert,
+    ActivityIndicator 
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
@@ -23,24 +23,63 @@ export default function Login() {
     async function handleSignIn() {
         setLoading(true);
 
-        console.log("Email enviado:", email);
-        console.log("Senha enviada:", password);
-
-        const { data, error } = await supabase.auth.signInWithPassword({
+        // Faz o login do usuário
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
             email: email,
-            password: password
+            password: password,
         });
 
-        if (error) {
-            Alert.alert("Erro", error.message);
+        if (authError) {
+            Alert.alert("Erro", authError.message);
             setLoading(false);
             return;
         }
 
-        console.log("Usuário logado:", data);
+        // Obtém o ID do usuário logado
+        const userId = authData.user?.id;
+
+        if (!userId) {
+            Alert.alert("Erro", "Usuário não encontrado.");
+            setLoading(false);
+            return;
+        }
+
+        // Verifica se o usuário é uma empresa
+        const { data: empresaData, error: empresaError } = await supabase
+            .from('empresa')
+            .select('id')
+            .eq('id_usuario', userId)
+            .single();
+
+        if (empresaError && empresaError.code !== 'PGRST116') { // PGRST116 = Nenhum resultado encontrado
+            Alert.alert("Erro", "Erro ao verificar empresa.");
+            setLoading(false);
+            return;
+        }
+
+        // Verifica se o usuário é um funcionário
+        const { data: funcionarioData, error: funcionarioError } = await supabase
+            .from('funcionarios')
+            .select('id')
+            .eq('id_usuario', userId)
+            .single();
+
+        if (funcionarioError && funcionarioError.code !== 'PGRST116') { 
+            Alert.alert("Erro", "Erro ao verificar funcionário.");
+            setLoading(false);
+            return;
+        }
+
+        // Redireciona com base no tipo de usuário
+        if (empresaData) {
+            router.replace('/(panel)/profile/page'); // Redireciona para a página da empresa
+        } else if (funcionarioData) {
+            router.replace('/(panel)/user/page'); // Redireciona para a página do funcionário
+        } else {
+            Alert.alert("Erro", "Usuário não encontrado em nenhuma tabela.");
+        }
 
         setLoading(false);
-        router.replace('/(panel)/profile/page');
     }
 
     return (

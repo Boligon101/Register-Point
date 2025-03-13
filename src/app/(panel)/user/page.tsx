@@ -48,7 +48,7 @@ export default function UserProfile() {
                 <View style={styles.container}>
                     <Nav />
                     
-                    <Text style={styles.slogan}>Perfil da Empresa</Text>
+                    <Text style={styles.slogan}>Perfil do Usuário</Text>
 
                     <View style={styles.form}>
                         {user ? (
