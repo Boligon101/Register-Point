@@ -5,5 +5,6 @@ export default {
   white: '#fff',
   green: '#99CF1D',
   gray: '#DDDDDD',
+  darckgreen: "#00A86B",
 
 };

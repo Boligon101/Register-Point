@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import colors from "@/constants/Colors";
+import Colors from "@/constants/Colors";
 
 export default StyleSheet.create({
     // Estilos gerais
@@ -74,12 +75,6 @@ export default StyleSheet.create({
         color: colors.zinc,
         marginBottom: 10,
     },
-    errorText: {
-        color: "red",
-        fontSize: 16,
-        textAlign: "center",
-        marginTop: 20,
-    },
 
     // Formulários e inputs
     form: {
@@ -98,14 +93,16 @@ export default StyleSheet.create({
         paddingHorizontal: 8,
         paddingVertical: 14,
     },
-    passwordContainer: {
-        flexDirection: "row",
-        alignItems: "center",
+    perfil_input: {
         borderWidth: 1,
         borderColor: colors.gray,
         borderRadius: 8,
         marginBottom: 16,
+        paddingHorizontal: 8,
+        paddingVertical: 14,
+        color: colors.white,
     },
+
     passwordInput: {
         flex: 1,
         paddingHorizontal: 8,
@@ -129,6 +126,7 @@ export default StyleSheet.create({
     button: {
         backgroundColor: colors.green,
         paddingVertical: 14,
+        margin: 3,
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
@@ -144,7 +142,7 @@ export default StyleSheet.create({
         opacity: 0.5,
     },
     buttonText: {
-        color: colors.zinc,
+        color: colors.white,
         fontWeight: "bold",
     },
     buttonAdd: {
@@ -197,24 +195,6 @@ export default StyleSheet.create({
         marginBottom: 3,
     },
 
-    // Perfil do usuário
-    profileContainer: {
-        backgroundColor: colors.white,
-        borderRadius: 16,
-        padding: 20,
-        marginBottom: 20,
-    },
-    profileLabel: {
-        fontSize: 16,
-        fontWeight: "bold",
-        color: colors.zinc,
-        marginBottom: 5,
-    },
-    profileValue: {
-        fontSize: 16,
-        color: colors.zinc,
-        marginBottom: 15,
-    },
 
     // Loading e mensagens
     loadingContainer: {
@@ -296,4 +276,307 @@ export default StyleSheet.create({
     overlayColor: {
         backgroundColor: "transparent",
     },
+    infoBox: {
+        backgroundColor: '#f0f0f0', 
+        borderRadius: 8, 
+        padding: 16, 
+        marginVertical: 10, 
+        borderWidth: 1, 
+        borderColor: '#ccc', 
+    },
+    mapContainer: {
+        height: 200, 
+        width: '100%', 
+        marginVertical: 10,
+        borderRadius: 8,
+        overflow: 'hidden', 
+    },
+
+    map: {
+        width: Dimensions.get("window").width - 50000,
+        height: 200, 
+        marginVertical: 10, 
+    },
+    
+    relogio: {
+        fontSize: 48,
+        fontWeight: "bold",
+        color: colors.white,
+        marginBottom: 40,
+    },
+    funcionarioCard: {
+        width: "100%",
+        padding: 20,
+        backgroundColor: Colors.gray,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 3,
+        marginBottom: 20,
+    },
+    buttonStart: {
+        backgroundColor: "#00A86B",
+        padding: 15,
+        borderRadius: 10,
+        alignItems: "center",
+        marginTop: 10
+    },
+    buttonEnd: {
+        backgroundColor: "#FF3B30",
+        padding: 15,
+        borderRadius: 10,
+        alignItems: "center",
+        marginTop: 10
+    },
+
+    pontoContainer: {
+        backgroundColor: Colors.white,
+        padding: 10,
+        borderRadius: 8,
+        marginVertical: 5,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+        elevation: 2,
+    },
+    // Estilo do botão de seleção de mês
+    monthButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: colors.gray,
+        borderRadius: 8,
+        paddingHorizontal: 12,
+        paddingVertical: 10,
+        marginBottom: 20,
+        backgroundColor: colors.white,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    monthButtonText: {
+        fontSize: 16,
+        color: colors.zinc,
+        marginLeft: 8,
+        fontWeight: "bold",
+        textTransform: "uppercase",
+    },
+
+    // Estilo do cabeçalho da lista (quando expandido)
+    dateHeader: {
+        backgroundColor: colors.green,
+        padding: 12,
+        borderRadius: 8,
+        marginBottom: 8,
+    },
+
+
+
+    // Estilo do container principal
+    ponto_container: {
+        flex: 1,
+        padding: 16,
+        backgroundColor: colors.zinc, // Fundo escuro
+    },
+
+    // Estilo do formulário (área branca)
+    ponto_form: {
+        backgroundColor: '#f3f5f6',
+        borderRadius: 16,
+        padding: 16,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+        elevation: 3,
+        flex: 1,
+    },
+
+    
+    // Estilos do MonthPicker
+    modalOverlay: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modalContent: {
+        width: "80%",
+        backgroundColor: colors.zinc, // Fundo escuro
+        borderRadius: 16,
+        padding: 20,
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: colors.white, // Texto branco
+        marginBottom: 10,
+        textAlign: "center",
+    },
+    monthItem: {
+        paddingVertical: 12,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.gray, // Linha cinza
+    },
+    monthText: {
+        fontSize: 16,
+        color: colors.white, // Texto branco
+        textAlign: "center",
+    },
+    closeButton: {
+        marginTop: 10,
+        padding: 10,
+        backgroundColor: colors.green, // Botão verde
+        borderRadius: 8,
+        alignItems: "center",
+    },
+    closeButtonText: {
+        fontSize: 16,
+        color: colors.white, // Texto branco
+        fontWeight: "bold",
+    },
+
+    dateHeaderText: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: colors.white,
+        textTransform: "capitalize", // Primeira letra de cada palavra em maiúscula
+    },
+
+    // Estilo do item da lista (fechado)
+    funcionarioItemClosed: {
+        backgroundColor: colors.white, // Cinza bem clarinho
+        padding: 12,
+        borderRadius: 8,
+        marginBottom: 8,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+        elevation: 2,
+    },
+
+    // Estilo do item da lista (expandido)
+    funcionarioItemExpanded: {
+        backgroundColor: colors.white,
+        padding: 12,
+        borderRadius: 8,
+        marginBottom: 8,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+
+    profileImage: {
+        width: 100,  // ou qualquer valor que você queira
+        height: 100, // ou qualquer valor que você queira
+        borderRadius: 50, // para fazer a imagem ficar redonda
+        marginBottom: 10, // opcional: para dar um espaço abaixo da imagem
+        alignSelf: 'center' // opcional: para centralizar a imagem
+      },
+      imageContainerPerfil: {
+        marginBottom: 20,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      image: {
+        width: 300,
+        height: 300,
+        borderRadius: 150, // Tornando a imagem circular
+        borderWidth: 5,
+        borderColor: "#ccc",
+        backgroundColor: "#eee",
+        padding: 10,
+        marginTop: "10%",
+      },
+
+      // Container do perfil
+    profileContainer: {
+        backgroundColor: colors.white,
+        borderRadius: 16,
+        padding: 20,
+        marginBottom: 20,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+        elevation: 3,
+    },
+
+
+    // Seção do perfil
+    profileSection: {
+        marginBottom: 20,
+    },
+
+    // Label dos dados
+    profileLabel: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: colors.zinc,
+        marginBottom: 4,
+    },
+
+    // Valor dos dados
+    profileValue: {
+        fontSize: 16,
+        color: colors.zinc,
+        marginBottom: 12,
+    },
+
+    // Container da senha
+    passwordContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+
+
+    // Texto do botão de mostrar/ocultar senha
+    passwordToggleText: {
+        fontSize: 14,
+        color: colors.darckgreen,
+        fontWeight: "bold",
+    },
+
+    // Mensagem de erro
+    errorText: {
+        fontSize: 16,
+        color: "red",
+        textAlign: "center",
+        marginTop: 20,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)", 
+        padding: 20,
+    },
+    cancelText: {
+        color: "red",
+        fontSize: 16,
+        fontWeight: "bold",
+        textAlign: "center",
+        marginTop: 10,
+    },
+    logoutButton: {
+        backgroundColor: "#FF3B30",
+    },
+    changePhotoText: {
+        marginTop: 10,
+        color: "#00A86B",
+        fontWeight: "bold",
+    },
+
+    
 });
+
+

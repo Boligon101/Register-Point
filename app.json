@@ -14,12 +14,27 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Este aplicativo usa a localização para registrar o ponto do funcionário."
+      },
+      "config": {
+        "googleMapsApiKey": "SUA_CHAVE_DA_API_DO_GOOGLE_MAPS"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "SUA_CHAVE_DA_API_DO_GOOGLE_MAPS"
+        }
       }
     },
     "web": {

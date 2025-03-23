@@ -77,6 +77,18 @@ export default function EmpresaLayout() {
                     drawerItemStyle: { display: "none" },
                 }}
             />
+            <Drawer.Screen
+                name="user/HistoricoPontos/page"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
+            <Drawer.Screen
+                name="user/perfil/page"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
         </Drawer>
     );
 }

@@ -1,81 +1,110 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, ScrollView } from "react-native";
-import { useAuth } from "@/src/context/AuthContext";
+import React, { useState } from "react";
+import { View, Text, Pressable, ActivityIndicator, Alert, SafeAreaView } from "react-native";
 import { supabase } from "@/src/lib/supabase";
+import { useAuth } from "@/src/context/AuthContext";
+import * as Location from 'expo-location';
 import styles from "@/assets/styles";
 import Nav from "@/src/components/nav";
 
-export default function UserProfile() {
-    const { user, logout } = useAuth();
-    const [userName, setUserName] = useState<string>("N/A");
+export default function PontoFuncionario() {
+    const { user } = useAuth();
+    const [pontoIniciado, setPontoIniciado] = useState<boolean>(false);
+    const [loadingPonto, setLoadingPonto] = useState<boolean>(false);
+    const [startTime, setStartTime] = useState<string | null>(null);
+    const [endTime, setEndTime] = useState<string | null>(null);
+    const [startLocation, setStartLocation] = useState<string | null>(null);
+    const [endLocation, setEndLocation] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchUserName = async () => {
-            if (!user) return;
+    const getLocation = async (): Promise<string | null> => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+            Alert.alert("Erro", "Permissão de localização negada.");
+            return null;
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        return `${location.coords.latitude}, ${location.coords.longitude}`;
+    };
 
-            // Se for uma empresa, use o nome do user_metadata
-            if (user.user_metadata?.name) {
-                setUserName(user.user_metadata.name);
-                return;
-            }
+    const iniciarPonto = async () => {
+        setLoadingPonto(true);
+        const now = new Date().toISOString();
+        const location = await getLocation();
+        if (!location) {
+            setLoadingPonto(false);
+            return;
+        }
 
-            // Se for um funcionário, busque o nome na tabela funcionarios
-            const { data: funcionario, error } = await supabase
-                .from('funcionarios')
-                .select('name')
-                .eq('id_usuario', user.id)
-                .single();
+        setStartTime(now);
+        setStartLocation(location);
+        setPontoIniciado(true);
+        setLoadingPonto(false);
 
-            if (error) {
-                console.error('Erro ao buscar funcionário:', error);
-                setUserName("N/A");
-                return;
-            }
+        Alert.alert("Ponto iniciado!", `Horário: ${now}\nLocalização: ${location}`);
+    };
 
-            if (funcionario) {
-                setUserName(funcionario.name);
-            } else {
-                setUserName("N/A");
-            }
-        };
+    const finalizarPonto = async () => {
+        if (!user || !startTime || !startLocation) {
+            Alert.alert("Erro", "Você precisa iniciar o ponto primeiro.");
+            return;
+        }
 
-        fetchUserName();
-    }, [user]);
+        setLoadingPonto(true);
+        const now = new Date().toISOString();
+        const location = await getLocation();
+        if (!location) {
+            setLoadingPonto(false);
+            return;
+        }
+
+        setEndTime(now);
+        setEndLocation(location);
+        setPontoIniciado(false);
+
+        const { error } = await supabase.from("pontos").insert({
+            id_usuario: user.id,
+            entrada: startTime,
+            location_entrada: startLocation,
+            saida: now,
+            location_saida: location,
+            ativo: true,
+            ausencia: false
+        });
+
+        if (error) {
+            console.error("Erro ao registrar ponto:", error);
+            Alert.alert("Erro", "Não foi possível registrar o ponto.");
+        } else {
+            Alert.alert("Ponto finalizado!", `Horário: ${now}\nLocalização: ${location}`);
+        }
+
+        setStartTime(null);
+        setStartLocation(null);
+        setEndTime(null);
+        setEndLocation(null);
+        setLoadingPonto(false);
+    };
 
     return (
         <SafeAreaView style={styles.safeArea}>
-            <ScrollView contentContainerStyle={styles.scrollView}>
-                <View style={styles.container}>
-                    <Nav />
-                    
-                    <Text style={styles.slogan}>Perfil do Usuário</Text>
+            <View style={styles.container}>
+                <Nav showBackButton={false} />
 
-                    <View style={styles.form}>
-                        {user ? (
-                            <>
-                                <View>
-                                    <Text style={styles.label}>Nome</Text>
-                                    <Text style={styles.text}>{userName}</Text>
-                                </View>
+                <Text style={styles.slogan}>Bater o Ponto</Text>
 
-                                <View>
-                                    <Text style={styles.label}>Email</Text>
-                                    <Text style={styles.text}>{user.email || "N/A"}</Text>
-                                </View>
-
-                                <Pressable 
-                                    style={styles.button} 
-                                    onPress={logout} 
-                                >
-                                    <Text style={styles.buttonText}>Deslogar</Text>
-                                </Pressable>
-                            </>
-                        ) : (
-                            <Text>Usuário não autenticado.</Text>
-                        )}
-                    </View>
-                </View>
-            </ScrollView>
+                <Pressable
+                    style={[styles.button, pontoIniciado ? styles.buttonEnd : styles.buttonStart]}
+                    onPress={pontoIniciado ? finalizarPonto : iniciarPonto}
+                    disabled={loadingPonto}
+                >
+                    {loadingPonto ? (
+                        <ActivityIndicator size="small" color={"#FFF"} />
+                    ) : (
+                        <Text style={styles.buttonText}>
+                            {pontoIniciado ? "Finalizar Ponto" : "Iniciar Ponto"}
+                        </Text>
+                    )}
+                </Pressable>
+            </View>
         </SafeAreaView>
     );
 }

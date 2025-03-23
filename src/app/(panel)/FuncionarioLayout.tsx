@@ -32,11 +32,27 @@ export default function FuncionarioLayout() {
             }}
         >
             <Drawer.Screen
+                name="user/perfil/page"
+                options={{
+                    drawerLabel: "Perfil",
+                    title: "Perfil",
+                    drawerIcon: ({ color }) => <Feather name="user" size={20} color={color} />,
+                }}
+            />
+            <Drawer.Screen
                 name="user/page"
                 options={{
                     drawerLabel: "Início",
                     title: "Início",
                     drawerIcon: ({ color }) => <Feather name="home" size={20} color={color} />,
+                }}
+            />
+            <Drawer.Screen
+                name="user/HistoricoPontos/page"
+                options={{
+                    drawerLabel: "Pontos",
+                    title: "Pontos",
+                    drawerIcon: ({ color }) => <Feather name="clock" size={20} color={color} />,
                 }}
             />
             <Drawer.Screen
