@@ -50,8 +50,9 @@ const CadastroFuncionario = () => {
 
   const handleCadastro = async () => {
     setLoading(true);
-
+    
     const dataNascimentoFormatada = formatarData(dataNascimento);
+
     if (!dataNascimentoFormatada) {
       Alert.alert('Erro', 'Data de nascimento inválida.');
       setLoading(false);
@@ -89,7 +90,7 @@ const CadastroFuncionario = () => {
           {
             name,
             cpf,
-            data_nacimento: dataNascimentoFormatada,
+            data_nascimento: dataNascimentoFormatada,
             salario: parseFloat(salario),
             carga_horaria: parseInt(cargaHoraria, 10),
             email,

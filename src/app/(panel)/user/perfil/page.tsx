@@ -11,7 +11,7 @@ import { useRouter } from "expo-router";
 import styles from "@/assets/styles";
 import * as FileSystem from 'expo-file-system';
 
-const imagemPadrao = require("@/assets/images/imagemPadrao.jpg");
+const imagemPadrao = require("@/assets/images/imagemPadrao.png");
 
 export default function PerfilFuncionario() {
     const { user, logout } = useAuth();
@@ -106,23 +106,20 @@ export default function PerfilFuncionario() {
             const { uri } = result.assets[0];
 
             try {
-                const fileExt = uri.split('.').pop();
-                const fileName = `${user?.id}_${Date.now()}.${fileExt}`;
+                const response = await fetch(uri);
+                const blob = await response.blob();
+                const arrayBuffer = await new Response(blob).arrayBuffer();
+                const fileName = `fotos-perfil/${Date.now()}.jpg`;
 
                 console.log("URI da imagem selecionada:", uri);
                 console.log("Nome do arquivo gerado:", fileName);
 
-                const file = await FileSystem.readAsStringAsync(uri, {
-                    encoding: FileSystem.EncodingType.Base64,
-                });
-
                 console.log("Iniciando upload da imagem para o Supabase Storage...");
 
-                const { data: uploadData, error: uploadError } = await supabase.storage
-                    .from('fotos-perfil')
-                    .upload(fileName, file, {
-                        contentType: `image/${fileExt}`,
-                    });
+                const { data: uploadData, error: uploadError } = await supabase
+                .storage
+                .from('fotos-perfil')
+                .upload(fileName, arrayBuffer, { contentType: 'image/jpeg', upsert: false });
 
                 if (uploadError) {
                     console.error("Erro ao fazer upload da imagem:", uploadError);
