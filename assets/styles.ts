@@ -925,7 +925,7 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         color: colors.green
     },
-    
+
     chartScrollContainer: {
         height: 250, // Altura fixa para o container
         marginBottom: 20,
@@ -945,7 +945,55 @@ export default StyleSheet.create({
     },
     chartHeight: {
         height: 200
-    }
+    },
+
+
+    fieldContainer: {
+        marginBottom: 15,
+    },
+
+    dateInput: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 15,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderRadius: 5,
+    },
+    addressContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    addressInput: {
+        flex: 1,
+        marginRight: 10,
+    },
+    locationButton: {
+        padding: 10,
+    },
+    descriptionInput: {
+        minHeight: 100,
+        textAlignVertical: 'top',
+    },
+
+    photoSection: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    uploadingText: {
+        color: '#00A86B',
+        marginTop: 5,
+        fontSize: 12,
+    },
+    coordinatesText: {
+        fontSize: 12,
+        color: '#666',
+        marginTop: 5,
+        fontStyle: 'italic',
+    },
+
+    
 
 });
 
