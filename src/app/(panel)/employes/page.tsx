@@ -4,17 +4,23 @@ import { useAuth } from "@/src/context/AuthContext";
 import { supabase } from "@/src/lib/supabase";
 import { router } from "expo-router";
 import { useFocusEffect } from '@react-navigation/native';
-import { Feather, MaterialIcons } from '@expo/vector-icons'; // Importe os ícones
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 import styles from "@/assets/styles";
 import Colors from "@/constants/Colors";
 import Nav from "@/src/components/nav";
 
-const formatarDataNascimento = (data: string) => {
-    if (!data) return "N/A";
+const calcularIdade = (dataNascimento: string) => {
+    const hoje = new Date();
+    const nascimento = new Date(dataNascimento);
 
-    // Converte a data do formato ISO (AAAA-MM-DD) para DD/MM/AAAA
-    const [ano, mes, dia] = data.split('T')[0].split('-');
-    return `${dia}/${mes}/${ano}`;
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+
+    return idade;
 };
 
 export default function Funcionarios() {
@@ -32,7 +38,6 @@ export default function Funcionarios() {
         }
 
         try {
-            // Buscar o id_empresa do usuário logado
             const { data: empresa, error: empresaError } = await supabase
                 .from('empresa')
                 .select('id')
@@ -43,7 +48,7 @@ export default function Funcionarios() {
                 throw new Error("Empresa não encontrada.");
             }
 
-            // Buscar os funcionários relacionados à empresa
+            // Busca simples na tabela funcionarios
             const { data: funcionariosData, error: funcionariosError } = await supabase
                 .from('funcionarios')
                 .select('*')
@@ -66,14 +71,12 @@ export default function Funcionarios() {
         }
     }, [user]);
 
-    // Recarrega os dados sempre que a tela receber foco
     useFocusEffect(
         useCallback(() => {
             fetchFuncionarios();
         }, [fetchFuncionarios])
     );
 
-    // Função para excluir um funcionário
     const handleExcluirFuncionario = async (id: string) => {
         try {
             const { error } = await supabase
@@ -85,7 +88,6 @@ export default function Funcionarios() {
                 throw new Error("Erro ao excluir funcionário.");
             }
 
-            // Atualiza a lista de funcionários após a exclusão
             setFuncionarios(funcionarios.filter((funcionario) => funcionario.id !== id));
             Alert.alert('Sucesso', 'Funcionário excluído com sucesso!');
         } catch (error) {
@@ -98,18 +100,14 @@ export default function Funcionarios() {
         }
     };
 
-    // Função para editar um funcionário
     const handleEditarFuncionario = async (funcionario: any) => {
         await router.push({
             pathname: "/(panel)/employes/edit/page",
             params: { funcionario: JSON.stringify(funcionario) },
         });
-
-        // Recarrega os dados após retornar da tela de edição
         fetchFuncionarios();
     };
 
-    // Função para filtrar funcionários pelo nome
     const filteredFuncionarios = funcionarios.filter((funcionario) =>
         funcionario.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -150,7 +148,6 @@ export default function Funcionarios() {
                     </Pressable>
 
                     <View style={styles.form}>
-                        {/* Barra de pesquisa */}
                         <TextInput
                             style={styles.searchInput}
                             placeholder="Pesquisar funcionário..."
@@ -160,17 +157,54 @@ export default function Funcionarios() {
                         {filteredFuncionarios.length > 0 ? (
                             filteredFuncionarios.map((funcionario) => (
                                 <View key={funcionario.id} style={styles.funcionarioItem}>
-                                    <Text style={styles.funcionarioName}>{funcionario.name}</Text>
-                                    <Text style={styles.funcionarioDetail}>Email: {funcionario.email}</Text>
-                                    <Text style={styles.funcionarioDetail}>CPF: {funcionario.cpf}</Text>
-                                    <Text style={styles.funcionarioDetail}>
-                                        Data de Nascimento: {formatarDataNascimento(funcionario.data_nacimento)}
+                                    <Text style={styles.funcionarioNameList}>
+                                        { ' ' + funcionario.name}
                                     </Text>
-                                    <Text style={styles.funcionarioDetail}>Salário: R$ {funcionario.salario}</Text>
-                                    <Text style={styles.funcionarioDetail}>Carga Horária: {funcionario.carga_horaria} horas</Text>
-                                    <Text style={styles.funcionarioDetail}>Número: {funcionario.numero}</Text>
+                                    <Text style={styles.funcionarioDetail}> 
+                                        <Text style={styles.listSubTitle}>
+                                            Email:
+                                        </Text> 
+                                        { ' ' + funcionario.email}
+                                    </Text>
+                                    <Text style={styles.funcionarioDetail}> 
+                                        <Text style={styles.listSubTitle}>
+                                            CPF: 
+                                        </Text>
+                                        { ' ' + funcionario.cpf}
+                                    </Text>
+                                    <Text style={styles.funcionarioDetail}>
+                                        <Text style={styles.listSubTitle}>Idade:</Text>
+                                        {funcionario.data_nascimento 
+                                            ? ` ${calcularIdade(funcionario.data_nascimento)} ${calcularIdade(funcionario.data_nascimento) !== 1 ? 'Anos' : 'Ano'}` 
+                                            : ' N/A'}
+                                    </Text>
+                                    <Text style={styles.funcionarioDetail}>
+                                        <Text style={styles.listSubTitle}>
+                                            Salário:   
+                                        </Text>
+                                        { ' R$' + funcionario.salario}
+                                    </Text>
+                                    <Text style={styles.funcionarioDetail}>
+                                        <Text style={styles.listSubTitle}>
+                                            Carga Horária: 
+                                        </Text>
+                                        {' ' + funcionario.carga_horaria} horas
+                                    </Text>
+                                    <Text style={styles.funcionarioDetail}>
+                                        <Text style={styles.listSubTitle}>
+                                            Número: 
+                                        </Text>
+                                        {' ' + funcionario.numero}
+                                    </Text>
+                                    
+                                    {/* Campo de departamento direto da coluna */}
+                                    <Text style={styles.funcionarioDetail}>
+                                        <Text style={styles.listSubTitle}>
+                                            Departamento: 
+                                        </Text>
+                                        { ' ' + funcionario.departamento || 'Não informado'}
+                                    </Text>
 
-                                    {/* Botões de ação */}
                                     <View style={styles.actionsContainer}>
                                         <Pressable
                                             style={styles.editButton}

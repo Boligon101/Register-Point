@@ -91,6 +91,12 @@ export default function FuncionarioLayout() {
                     drawerItemStyle: { display: "none" },
                 }}
             />
+            <Drawer.Screen
+                name="employes/perfil/page"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
         </Drawer>
     );
 }

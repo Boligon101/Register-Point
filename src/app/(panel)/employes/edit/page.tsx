@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Pressable, Alert } from "react-native";
+import { Picker } from '@react-native-picker/picker';
 import { supabase } from "@/src/lib/supabase";
 import { router, useLocalSearchParams } from "expo-router";
 import styles from "@/assets/styles";
@@ -12,6 +13,18 @@ export default function EditarFuncionario() {
     const { funcionario } = useLocalSearchParams();
     const funcionarioData = JSON.parse(funcionario as string);
 
+    // Lista fixa de departamentos (igual ao formulário de criação)
+    const departamentos = [
+        { id: "1", nome: "Administrativo" },
+        { id: "2", nome: "Financeiro" },
+        { id: "3", nome: "RH" },
+        { id: "4", nome: "TI" },
+        { id: "5", nome: "Vendas" },
+        { id: "6", nome: "Marketing" },
+        { id: "7", nome: "Produção" },
+        { id: "8", nome: "Logística" },
+    ];
+
     const [name, setName] = useState(funcionarioData.name);
     const [email, setEmail] = useState(funcionarioData.email);
     const [cpf, setCpf] = useState(funcionarioData.cpf);
@@ -19,6 +32,7 @@ export default function EditarFuncionario() {
     const [salario, setSalario] = useState(funcionarioData.salario.toString());
     const [cargaHoraria, setCargaHoraria] = useState(funcionarioData.carga_horaria.toString());
     const [numero, setNumero] = useState(funcionarioData.numero);
+    const [departamento, setDepartamento] = useState(funcionarioData.departamento || "");
 
     const handleSalvarEdicao = async () => {
         try {
@@ -32,6 +46,7 @@ export default function EditarFuncionario() {
                     salario: parseFloat(salario),
                     carga_horaria: parseInt(cargaHoraria, 10),
                     numero,
+                    departamento,
                 })
                 .eq('id', funcionarioData.id);
 
@@ -53,9 +68,8 @@ export default function EditarFuncionario() {
 
     return (
         <SafeAreaView style={styles.safeArea}>
-              <ScrollView contentContainerStyle={styles.scrollView}>
+            <ScrollView contentContainerStyle={styles.scrollView}>
                 <View style={styles.container}>
-
                     <Nav showBackButton={true}/>
                     <Text style={styles.slogan}>Editar Funcionário</Text>
 
@@ -106,6 +120,23 @@ export default function EditarFuncionario() {
                             onChangeText={setNumero}
                             keyboardType="phone-pad"
                         />
+
+                        {/* Novo campo de departamento */}
+                        <View style={{ marginBottom: 15 }}>
+                            <Text style={styles.label}>Departamento</Text>
+                            <View style={styles.pickerContainer}>
+                                <Picker
+                                    selectedValue={departamento}
+                                    onValueChange={(itemValue: string) => setDepartamento(itemValue)}
+                                    style={styles.picker}
+                                >
+                                    <Picker.Item label="Selecione um departamento..." value="" />
+                                    {departamentos.map((dept) => (
+                                        <Picker.Item key={dept.id} label={dept.nome} value={dept.nome} />
+                                    ))}
+                                </Picker>
+                            </View>
+                        </View>
 
                         <Pressable
                             style={styles.button}

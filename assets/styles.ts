@@ -183,12 +183,7 @@ export default StyleSheet.create({
         shadowRadius: 5,
         elevation: 3,
     },
-    funcionarioName: {
-        fontSize: 18,
-        fontWeight: "bold",
-        color: colors.zinc,
-        marginBottom: 5,
-    },
+
     funcionarioDetail: {
         fontSize: 14,
         color: colors.zinc,
@@ -516,6 +511,15 @@ export default StyleSheet.create({
         marginBottom: 20,
     },
 
+    listSubTitle: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: colors.zinc,
+        marginBottom: 4,
+        marginLeft: 30,
+
+    },
+
     // Label dos dados
     profileLabel: {
         fontSize: 16,
@@ -575,8 +579,375 @@ export default StyleSheet.create({
         color: "#00A86B",
         fontWeight: "bold",
     },
+    
+    // Cabeçalho com informações
+    headerInfo: {
+        alignItems: 'center',
+        marginBottom: 30,
+    },
+    
+    
+    // Relógio em tempo real
+    clockContainer: {
+        alignItems: 'center',
+        marginVertical: 30,
+    },
 
     
+    // Botão de ponto redondo
+    roundButtonContainer: {
+        alignItems: 'center',
+        marginBottom: 50,
+    },
+    
+    
+    roundButtonPressed: {
+        transform: [{ scale: 0.95 }],
+        backgroundColor: '#00C853',
+    },
+    
+
+    
+    // Rodapé com informações adicionais
+    footerInfo: {
+        alignItems: 'center',
+    },
+    
+    infoText: {
+        fontSize: 14,
+        color: colors.white,
+        marginBottom: 5,
+    },
+    
+    
+    // Container das informações
+    infoContainer: {
+        alignItems: 'center',
+        marginBottom: 30,
+    },
+    
+    
+    // Container do botão de ponto
+    buttonContainer: {
+        alignItems: 'center',
+        marginBottom: 40,
+    },
+    
+
+    // ========================================================
+    // Novo container principal
+    pontoScreenContainer: {
+        flex: 1,
+        justifyContent: 'space-between',
+        padding: 20,
+    },
+    
+    // Relógio no topo com sombra
+    clockHeader: {
+        alignItems: 'center',
+        marginBottom: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    
+    timeText: {
+        fontSize: 72,
+        fontWeight: 'semibold',
+        color: colors.white,
+        textShadowColor: 'rgba(0, 0, 0, 0.3)',
+        textShadowOffset: { width: 0, height: 2 },
+        textShadowRadius: 4,
+    },
+    
+    dateText: {
+        fontSize: 20,
+        color: colors.white,
+        textShadowColor: 'rgba(0, 0, 0, 0.3)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 2,
+    },
+    
+    // Container das informações (empresa, funcionário e tempo trabalhado)
+    infoRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 40,
+        paddingHorizontal: 20,
+    },
+    
+    infoColumn: {
+        flex: 1,
+    },
+    
+    empresaName: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: colors.green,
+        marginBottom: 5,
+    },
+    
+    funcionarioName: {
+        fontSize: 18,
+        color: colors.white,
+    },
+
+    funcionarioNameList: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: colors.green,
+    },
+    
+    timeWorkedContainer: {
+        alignItems: 'flex-end',
+    },
+    
+    timeWorkedText: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: colors.green,
+        marginBottom: 5,
+        marginTop: 10,
+    },
+    
+    timeWorkedValue: {
+        fontSize: 24,
+        color: colors.white,
+    },
+    
+    // Container central do botão
+    centerContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 40,
+    },
+    
+    // Botão com área de toque aumentada
+    buttonWrapper: {
+        position: 'relative',
+    },
+    
+    buttonTouchArea: {
+        position: 'absolute',
+        top: -30,
+        left: -30,
+        right: -30,
+        bottom: -30,
+        zIndex: 1,
+    },
+    
+    roundButton: {
+        width: 160,
+        height: 160,
+        borderRadius: 80,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.green,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.3,
+        shadowRadius: 15,
+        elevation: 10,
+    },
+    
+    roundButtonDisabled: {
+        backgroundColor: '#6b7280',
+    },
+    
+    roundButtonText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: colors.white,
+    },
+    
+    // Efeito de pulso quando ativo
+    pulseEffect: {
+        position: 'absolute',
+        width: 180,
+        height: 180,
+        borderRadius: 90,
+        backgroundColor: 'rgba(0, 168, 107, 0.3)',
+    },
+    
+    // Status na parte inferior
+    statusContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
+        paddingHorizontal: 20,
+    },
+    
+    statusText: {
+        fontSize: 16,
+        color: colors.white,
+        textAlign: 'center',
+    },
+    pickerContainer: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        marginBottom: 15,
+        overflow: 'hidden',
+    },
+    picker: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#f9f9f9',
+    },
+
+    subtitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 10,
+    color: Colors.darckgreen,
+    },
+
+
+    // ========================================================
+    // ESTILOS ESPECÍFICOS DA PÁGINA DE ESTATÍSTICAS
+    // (usar prefixo "stats_" para evitar conflitos)
+    // ========================================================
+
+    // Container principal
+    stats_container: {
+        flex: 1,
+        padding: 20,
+        paddingBottom: 40,
+        backgroundColor: colors.zinc,
+    },
+
+    // Cabeçalho
+    stats_header: {
+        marginBottom: 20
+    },
+
+    // Seletor de período
+    stats_periodContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 15
+    },
+    stats_periodButton: {
+        flex: 1,
+        marginHorizontal: 5,
+        paddingVertical: 8,
+        borderRadius: 8,
+        backgroundColor: colors.lightGray,
+        alignItems: 'center'
+    },
+    stats_periodButtonActive: {
+        backgroundColor: colors.green
+    },
+    stats_periodButtonText: {
+        color: colors.dark
+    },
+    stats_periodButtonTextActive: {
+        color: colors.white
+    },
+
+    // Containers de gráficos
+    stats_chartContainer: {
+        backgroundColor: colors.white,
+        borderRadius: 12,
+        padding: 15,
+        marginBottom: 20,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3
+    },
+    stats_chartTitle: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: colors.dark,
+        marginBottom: 10,
+        textAlign: 'center'
+    },
+    stats_chart: {
+        borderRadius: 8,
+        marginTop: 10
+    },
+
+    // Legenda
+    stats_legendContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginTop: 10
+    },
+    stats_legendItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: 5
+    },
+    stats_legendColor: {
+        width: 12,
+        height: 12,
+        borderRadius: 6,
+        marginRight: 5
+    },
+    stats_legendText: {
+        fontSize: 12,
+        color: colors.dark
+    },
+
+    // Cards de resumo
+    stats_cardsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 20
+    },
+    stats_card: {
+        flex: 1,
+        backgroundColor: colors.white,
+        borderRadius: 12,
+        padding: 15,
+        marginHorizontal: 5,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3
+    },
+    stats_cardTitle: {
+        fontSize: 14,
+        color: colors.dark,
+        marginBottom: 5
+    },
+    stats_cardValue: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: colors.green
+    },
+    
+    chartScrollContainer: {
+        height: 250, // Altura fixa para o container
+        marginBottom: 20,
+      },
+      
+      // Estilo para o gráfico dentro do scroll
+      chartInScroll: {
+        paddingRight: 20, // Espaço no final para não cortar
+      },
+
+    // ========================================================
+    // MEDIDAS RESPONSIVAS
+    // ========================================================
+    
+    chartWidth: {
+        width: Dimensions.get("window").width - 40
+    },
+    chartHeight: {
+        height: 200
+    }
+
 });
+
 
 

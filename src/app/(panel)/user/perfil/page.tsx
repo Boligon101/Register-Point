@@ -62,6 +62,8 @@ export default function PerfilFuncionario() {
     const formatarTelefone = (numero: string) => {
         if (!numero) return "Não informado";
         const numerosApenas = numero.replace(/\D/g, "");
+        console.log("Número original:", numero);
+        console.log("Número sem formatação:", numerosApenas);
 
         if (numerosApenas.length === 12) {
             return numerosApenas.replace(/^(\d{2})(\d{5})(\d{5})$/, "($1) $2-$3");
@@ -184,6 +186,9 @@ export default function PerfilFuncionario() {
                             <View style={styles.profileSection}>
                                 <Text style={styles.profileLabel}>Nome:</Text>
                                 <Text style={styles.profileValue}>{funcionario.name}</Text>
+                                
+                                <Text style={styles.profileLabel}>Departamento:</Text>
+                                <Text style={styles.profileValue}>{funcionario.departamento}</Text>
 
                                 <Text style={styles.profileLabel}>Idade:</Text>
                                 <Text style={styles.profileValue}>{funcionario.data_nascimento ? calcularIdade(funcionario.data_nascimento) + " anos" : "Não informado"}</Text>

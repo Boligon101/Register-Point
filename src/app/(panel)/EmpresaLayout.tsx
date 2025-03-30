@@ -32,6 +32,14 @@ export default function EmpresaLayout() {
             }}
         >
             <Drawer.Screen
+                name="employes/perfil/page"
+                options={{
+                    drawerLabel: "Perfil",
+                    title: "Perfil",
+                    drawerIcon: ({ color }) => <Feather name="user" size={20} color={color} />,
+                }}
+            />
+            <Drawer.Screen
                 name="profile/page"
                 options={{
                     drawerLabel: "Início",

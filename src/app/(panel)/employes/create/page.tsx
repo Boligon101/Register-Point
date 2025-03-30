@@ -1,6 +1,7 @@
 import { supabase } from "@/src/lib/supabase";
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Pressable, SafeAreaView, ScrollView, Alert } from "react-native";
+import { Picker } from '@react-native-picker/picker';
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import styles from "@/assets/styles";
@@ -14,10 +15,23 @@ const CadastroFuncionario = () => {
   const [email, setEmail] = useState<string>("");
   const [numero, setNumero] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
+  const [departamento, setDepartamento] = useState<string>("");
   const [idEmpresa, setIdEmpresa] = useState<string | null>(null);
   const [ativo, setAtivo] = useState<boolean>(true);
   const [admin, setAdmin] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+
+  // Lista fixa de departamentos
+  const departamentos = [
+    { id: "1", nome: "Administrativo" },
+    { id: "2", nome: "Financeiro" },
+    { id: "3", nome: "RH" },
+    { id: "4", nome: "TI" },
+    { id: "5", nome: "Vendas" },
+    { id: "6", nome: "Marketing" },
+    { id: "7", nome: "Produção" },
+    { id: "8", nome: "Logística" },
+  ];
 
   useEffect(() => {
     const fetchEmpresaId = async () => {
@@ -65,6 +79,12 @@ const CadastroFuncionario = () => {
       return;
     }
 
+    if (!departamento) {
+      Alert.alert('Erro', 'Selecione um departamento.');
+      setLoading(false);
+      return;
+    }
+
     // Criação do usuário no Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: email,
@@ -74,7 +94,7 @@ const CadastroFuncionario = () => {
               display_name: name, 
           },
       },
-  });
+    });
 
     if (authError) {
       Alert.alert('Erro', 'Erro ao criar usuário: ' + authError.message);
@@ -99,6 +119,8 @@ const CadastroFuncionario = () => {
             ativo,
             admin,
             id_usuario: authData.user.id,
+            departamento, 
+            foto_perfil: 'imagemPadrao.jpg' // Imagem padrão
           },
         ]);
 
@@ -115,6 +137,7 @@ const CadastroFuncionario = () => {
         setEmail('');
         setNumero('');
         setSenha('');
+        setDepartamento('');
       }
     } else {
       Alert.alert('Erro', 'Usuário não foi criado.');
@@ -202,6 +225,22 @@ const CadastroFuncionario = () => {
                 }}
                 keyboardType="numeric"
               />
+            </View>
+
+            <View>
+              <Text style={styles.label}>Departamento</Text>
+              <View style={styles.pickerContainer}>
+                <Picker
+                  selectedValue={departamento}
+                  onValueChange={(itemValue) => setDepartamento(itemValue)}
+                  style={styles.picker}
+                >
+                  <Picker.Item label="Selecione um departamento..." value="" />
+                  {departamentos.map((dept) => (
+                    <Picker.Item key={dept.id} label={dept.nome} value={dept.nome} />
+                  ))}
+                </Picker>
+              </View>
             </View>
 
             <View>
