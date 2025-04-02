@@ -56,6 +56,15 @@ export default function EmpresaLayout() {
                 }}
             />
             <Drawer.Screen
+                name="profile/demandas/page"
+                options={{
+                    drawerLabel: "Calendário",
+                    title: "Calendário",
+                    drawerIcon: ({ color }) => <Feather name="calendar" size={20} color={color} />,
+                }}
+            />
+
+            <Drawer.Screen
                 name="employes/create/page"
                 options={{
                     drawerItemStyle: { display: "none" },
@@ -93,6 +102,12 @@ export default function EmpresaLayout() {
             />
             <Drawer.Screen
                 name="user/perfil/page"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
+            <Drawer.Screen
+                name="user/visualizar-demandas/page"
                 options={{
                     drawerItemStyle: { display: "none" },
                 }}

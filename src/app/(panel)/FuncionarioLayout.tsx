@@ -56,6 +56,14 @@ export default function FuncionarioLayout() {
                 }}
             />
             <Drawer.Screen
+                name="user/visualizar-demandas/page"
+                options={{
+                    drawerLabel: "Calendário",
+                    title: "Calendário",
+                    drawerIcon: ({ color }) => <Feather name="calendar" size={20} color={color} />,
+                }}
+            />
+            <Drawer.Screen
                 name="profile/page"
                 options={{
                     drawerItemStyle: { display: "none" },
@@ -93,6 +101,12 @@ export default function FuncionarioLayout() {
             />
             <Drawer.Screen
                 name="employes/perfil/page"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
+            <Drawer.Screen
+                name="profile/demandas/page"
                 options={{
                     drawerItemStyle: { display: "none" },
                 }}

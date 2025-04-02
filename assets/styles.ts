@@ -806,6 +806,14 @@ export default StyleSheet.create({
     color: Colors.darckgreen,
     },
 
+    modal_subtitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 5,
+    marginBottom: 10,
+    color: Colors.green,
+    },
+
 
     // ========================================================
     // ESTILOS ESPECÍFICOS DA PÁGINA DE ESTATÍSTICAS
@@ -992,10 +1000,41 @@ export default StyleSheet.create({
         marginTop: 5,
         fontStyle: 'italic',
     },
+    selectedChip: {
+        backgroundColor: Colors.lightGray,
+        borderRadius: 15,
+        padding: 8,
+        margin: 4,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    removeButton: {
+        marginLeft: 8
+    },
+    cancelButton: {
+        backgroundColor: Colors.darkZinc,
+        marginRight: 12,
+        width: 100,
+    },
+    saveButton: {
+        backgroundColor: Colors.green,
+        width: 100,
+    },
+    modalSubtitle: {
+        fontSize: 18,
+        color: Colors.gray,
+        marginBottom: 20,
+        marginTop: 15,
+    },
+    funcionarioItemLast: {
+        marginBottom: 0, // Remove a margem inferior do último item
+    },
 
-    
+    inputError: {
+        borderColor: Colors.red,
+        borderWidth: 1,
+    },
+
 
 });
-
-
 

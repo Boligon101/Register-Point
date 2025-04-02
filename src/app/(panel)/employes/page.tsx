@@ -173,11 +173,11 @@ export default function Funcionarios() {
                                         { ' ' + funcionario.cpf}
                                     </Text>
                                     <Text style={styles.funcionarioDetail}>
-                                        <Text style={styles.listSubTitle}>Idade:</Text>
-                                        {funcionario.data_nascimento 
-                                            ? ` ${calcularIdade(funcionario.data_nascimento)} ${calcularIdade(funcionario.data_nascimento) !== 1 ? 'Anos' : 'Ano'}` 
-                                            : ' N/A'}
-                                    </Text>
+                                    <Text style={styles.listSubTitle}>Idade:</Text>
+                                    {funcionario.data_nascimento 
+                                        ? ` ${calcularIdade(funcionario.data_nascimento)} ${calcularIdade(funcionario.data_nascimento) !== 1 ? 'Anos' : 'Ano'}` 
+                                        : ' N/A'}
+                                </Text>
                                     <Text style={styles.funcionarioDetail}>
                                         <Text style={styles.listSubTitle}>
                                             Salário:   
