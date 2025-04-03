@@ -64,6 +64,27 @@ export default function FuncionarioLayout() {
                 }}
             />
             <Drawer.Screen
+                name="chat/page"
+                options={{
+                    drawerLabel: "Chat",
+                    title: "Chat",
+                    drawerIcon: ({ color }) => <Feather name="message-circle" size={20} color={color} />,
+                }}
+            />
+
+            <Drawer.Screen
+                name="chat/new"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
+            <Drawer.Screen
+                name="chat/conversation"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
+            <Drawer.Screen
                 name="profile/page"
                 options={{
                     drawerItemStyle: { display: "none" },

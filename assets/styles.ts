@@ -3,6 +3,177 @@ import colors from "@/constants/Colors";
 import Colors from "@/constants/Colors";
 
 export default StyleSheet.create({
+
+    whatsappHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: Colors.green,
+        elevation: 4,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+      },
+      headerIcons: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      headerIcon: {
+        marginLeft: 20,
+      },
+      chatInfo: {
+        flex: 1,
+        marginLeft: 15,
+      },
+      chatTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'white',
+      },
+      chatParticipants: {
+        fontSize: 14,
+        color: 'rgba(255,255,255,0.8)',
+      },
+      chatMessagesContainer: {
+        paddingBottom: 20,
+        backgroundColor: '#e5ddd5',
+        flexGrow: 1,
+      },
+      messagesWrapper: {
+        paddingBottom: 80,
+      },
+      noMessagesContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 50,
+      },
+      emptyChatImage: {
+        width: 200,
+        height: 200,
+        opacity: 0.5,
+        marginBottom: 20,
+      },
+      noMessagesText: {
+        textAlign: 'center',
+        color: Colors.gray,
+        fontSize: 16,
+      },
+      messageContainer: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        marginVertical: 4,
+        paddingHorizontal: 8,
+        maxWidth: '80%',
+      },
+      myMessageContainer: {
+        alignSelf: 'flex-end',
+        marginLeft: '20%',
+      },
+      otherMessageContainer: {
+        alignSelf: 'flex-start',
+      },
+      messageBubble: {
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderRadius: 8,
+        marginLeft: 8,
+      },
+      myMessageBubble: {
+        backgroundColor: '#dcf8c6',
+        borderTopRightRadius: 0,
+      },
+      otherMessageBubble: {
+        backgroundColor: 'white',
+        borderTopLeftRadius: 0,
+      },
+      senderName: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: Colors.green,
+        marginBottom: 4,
+      },
+      myMessageText: {
+        fontSize: 16,
+        color: 'black',
+      },
+      otherMessageText: {
+        fontSize: 16,
+        color: 'black',
+      },
+      messageFooter: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginTop: 4,
+      },
+      messageTime: {
+        fontSize: 11,
+        color: 'rgba(0,0,0,0.5)',
+      },
+      whatsappInputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 8,
+        backgroundColor: 'white',
+        borderTopWidth: 1,
+        borderTopColor: '#e5e5e5',
+      },
+      inputActionButton: {
+        padding: 8,
+      },
+      whatsappInput: {
+        flex: 1,
+        minHeight: 40,
+        maxHeight: 100,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#e5e5e5',
+        marginHorizontal: 4,
+      },
+      sendButton: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: Colors.green,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 8,
+      },
+      avatarWrapper: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: Colors.lightGray,
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
+      },
+      avatarImage: {
+        width: '100%',
+        height: '100%',
+      },
+      avatarFallback: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: Colors.lightGreen,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      avatarInitial: {
+        color: Colors.green,
+        fontWeight: 'bold',
+        fontSize: 16,
+      },
+      blueTick: {
+        color: '#53bdeb',
+      },
+
     // Estilos gerais
     safeArea: {
         flex: 1,
@@ -1034,6 +1205,101 @@ export default StyleSheet.create({
         borderColor: Colors.red,
         borderWidth: 1,
     },
+    avatarContainer: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: Colors.lightGray,
+        marginRight: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden'
+    },
+    chatHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 15,
+        backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee'
+      },
+
+      
+      myMessage: {
+        alignSelf: 'flex-end',
+        backgroundColor: Colors.lightGreen,
+        borderBottomRightRadius: 0
+      },
+      otherMessage: {
+        alignSelf: 'flex-start',
+        backgroundColor: '#f5f5f5',
+        borderBottomLeftRadius: 0
+      },
+      messageHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5
+      },
+      chat_avatarImage: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        marginRight: 8
+      },
+      chat_avatarFallback: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        backgroundColor: Colors.lightGray,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 8
+      },
+      chat_avatarInitial: {
+        color: Colors.green,
+        fontWeight: 'bold',
+        fontSize: 14
+      },
+      
+      messageInputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: '#fff',
+        borderTopWidth: 1,
+        borderTopColor: '#eee'
+      },
+      messageInput: {
+        flex: 1,
+        marginRight: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        backgroundColor: '#f5f5f5',
+        borderRadius: 20,
+        maxHeight: 100
+      },
+      
+    messageContent: {
+        flex: 1,
+    },
+    dayContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 36,
+        height: 36,
+    },
+    markedDayContainer: {
+        backgroundColor: 'rgba(74, 222, 128, 0.2)',
+        borderRadius: 18,
+    },
+    markedDayText: {
+        color: Colors.white,
+        fontWeight: 'bold',
+    },
+
+
+    
+    
 
 
 });

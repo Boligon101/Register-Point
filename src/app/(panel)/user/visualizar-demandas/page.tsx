@@ -121,7 +121,6 @@ export default function DemandasFuncionario() {
     
             // Formata os dados das demandas
             const demandasFormatadas = demandasValidas.map((d: any) => {
-                // Verificação adicional para garantir que os dados existem
                 if (!d.demandas || !d.funcionarios) {
                     console.warn("Registro inválido encontrado:", d);
                     return null;
@@ -152,8 +151,10 @@ export default function DemandasFuncionario() {
                 (demanda: any, index: number, self: any[]) =>
                     index === self.findIndex((d) => d.id === demanda.id)
             );
-            
-
+    
+            setDemandas(demandasUnicas);
+            updateMarkedDates(demandasUnicas);
+            updateDemandasCounters(demandasUnicas);
     
         } catch (error) {
             console.error("Erro ao carregar demandas:", error);
@@ -164,6 +165,8 @@ export default function DemandasFuncionario() {
             setLoading(false);
         }
     };
+
+    console.log("DEMANDAS ",demandas)
 
     const updateDemandasCounters = (demandas: Demanda[]) => {
         const hoje = new Date();

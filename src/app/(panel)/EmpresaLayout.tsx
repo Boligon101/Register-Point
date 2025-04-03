@@ -64,6 +64,25 @@ export default function EmpresaLayout() {
                 }}
             />
 
+
+            <Drawer.Screen
+                name="chat/page"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
+            <Drawer.Screen
+                name="chat/new"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
+            <Drawer.Screen
+                name="chat/conversation"
+                options={{
+                    drawerItemStyle: { display: "none" },
+                }}
+            />
             <Drawer.Screen
                 name="employes/create/page"
                 options={{
